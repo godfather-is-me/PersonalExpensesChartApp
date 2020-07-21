@@ -1,6 +1,6 @@
-# per_exp
+# Personal Expenses Chart App
 
-A new Flutter project.
+This is my first app in flutter - a personal expenses tracker with a dynamic chart
 
 ## Getting Started
 
