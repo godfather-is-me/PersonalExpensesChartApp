@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/cupertino.dart';
 
 class NewTransaction extends StatefulWidget {
   final Function transPointer;
@@ -105,11 +107,16 @@ class _NewTransactionState extends State<NewTransaction> {
                   ],
                 ),
               ),
-              FlatButton(
-                onPressed: submitData,
-                child: Text('Add Transaction'),
-                textColor: Colors.purple,
-              ),
+              Platform.isIOS
+                  ? CupertinoButton(
+                      child: Text('Add Transaction'),
+                      onPressed: submitData,
+                    )
+                  : FlatButton(
+                      onPressed: submitData,
+                      child: Text('Add Transaction'),
+                      textColor: Colors.purple,
+                    ),
             ],
           ),
         ),
