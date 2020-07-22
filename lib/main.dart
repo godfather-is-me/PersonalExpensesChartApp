@@ -51,6 +51,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool _showchart = false;
+
   final List<Transaction> _userTransactions = [
     Transaction(
       id: 't1',
@@ -132,20 +134,38 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              height: ((MediaQuery.of(context).size.height -
-                      appBars.preferredSize.height -
-                      MediaQuery.of(context).padding.top) *
-                  0.3),
-              child: Chart(_recentTrans),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Show chart',
+                ),
+                Switch(
+                  value: _showchart,
+                  onChanged: (val) {
+                    setState(() {
+                      _showchart = val;
+                    });
+                  },
+                ),
+              ],
             ),
-            Container(
-              height: ((MediaQuery.of(context).size.height -
-                      appBars.preferredSize.height -
-                      MediaQuery.of(context).padding.top) *
-                  0.7),
-              child: TransactionList(_userTransactions, _deleteTransaction),
-            ),
+            _showchart
+                ? Container(
+                    height: ((MediaQuery.of(context).size.height -
+                            appBars.preferredSize.height -
+                            MediaQuery.of(context).padding.top) *
+                        0.3),
+                    child: Chart(_recentTrans),
+                  )
+                : Container(
+                    height: ((MediaQuery.of(context).size.height -
+                            appBars.preferredSize.height -
+                            MediaQuery.of(context).padding.top) *
+                        0.7),
+                    child:
+                        TransactionList(_userTransactions, _deleteTransaction),
+                  ),
           ],
         ),
       ),
